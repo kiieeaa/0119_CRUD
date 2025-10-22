@@ -19,4 +19,20 @@ const db = mysql.createConnection({
     password: '@dlh010404', 
     database: 'pws_crud'
 });
+db.connect((err) => {
+    if (err) {
+        console.error('Error connecting to the database:' + err.stack);
+        return;
+    }
+    console.log('Connected Sussesfully');
+});
 
+app.get('/api/mahasiswa', (req, res) => {
+    db.query('SELECT * from biodata', (err, results) => {
+        if (err) {
+            console.error('Error executing query:' + err.stack);
+            res.status(500).send('Error fetching Mahasiswa');
+            return;
+        }
+    });
+});
